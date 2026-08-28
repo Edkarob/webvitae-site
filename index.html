@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edkar — Desarrollo web para pymes</title>
+<meta name="description" content="Sitios web con código propio para pymes chilenas. Diseño a medida, tecnología moderna, sin plantillas genéricas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F5F7;
+    --bg-alt:#ECEDF1;
+    --ink:#14171C;
+    --ink-soft:#565C68;
+    --line:#D8DBE1;
+    --surface:#12141A;
+    --surface-2:#1B1E27;
+    --surface-line:#2B2F3A;
+    --paper-on-dark:#C7CBD4;
+    --accent:#3E63DD;
+    --accent-soft:#EAEEFF;
+    --pro:#E8A33D;
+    --pro-soft:#FCF1DD;
+    --diff-add:#4C8C5C;
+    --diff-add-bg:#E7F3E9;
+    --diff-add-bg-dark:#1C2A20;
+    --diff-add-dark:#7FBE8E;
+    --diff-off:#8A8F99;
+    --radius:14px;
+    --font-display:'Space Grotesk', sans-serif;
+    --font-body:'IBM Plex Sans', sans-serif;
+    --font-mono:'IBM Plex Mono', monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--font-body);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  ::selection{background:var(--accent);color:#fff;}
+
+  .wrap{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(244,245,247,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 0;
+  }
+  .brand{
+    font-family:var(--font-mono);
+    font-weight:600;
+    font-size:15px;
+    letter-spacing:-0.01em;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .brand .dot{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--accent);
+    box-shadow:0 0 0 3px var(--accent-soft);
+  }
+  .nav-links{
+    display:flex;
+    gap:28px;
+    font-size:14px;
+    font-weight:500;
+    list-style:none;
+    margin:0;padding:0;
+  }
+  .nav-links a{text-decoration:none;color:var(--ink-soft);transition:color .15s;}
+  .nav-links a:hover{color:var(--ink);}
+  .nav-cta{
+    font-family:var(--font-mono);
+    font-size:13px;
+    background:var(--ink);
+    color:#fff;
+    padding:9px 16px;
+    border-radius:8px;
+    text-decoration:none;
+    white-space:nowrap;
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .nav-cta:hover{
+    transform:translateY(-1px);
+    background:var(--accent);
+    box-shadow:0 8px 18px -6px rgba(62,99,221,0.45);
+  }
+  .nav-mobile-hide{display:flex;}
+  @media (max-width:720px){
+    .nav-mobile-hide{display:none;}
+  }
+
+  /* ---------- Hero / terminal ---------- */
+  .hero{
+    padding:76px 0 64px;
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    gap:56px;
+    align-items:center;
+  }
+  @media (max-width:900px){
+    .hero{grid-template-columns:1fr;padding:48px 0 40px;gap:40px;}
+  }
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:13px;
+    color:var(--accent);
+    letter-spacing:0.02em;
+    margin-bottom:18px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .eyebrow::before{content:"$";color:var(--diff-off);}
+  h1{
+    font-family:var(--font-display);
+    font-size:clamp(34px,4.6vw,54px);
+    line-height:1.06;
+    letter-spacing:-0.02em;
+    margin:0 0 22px;
+    font-weight:600;
+  }
+  h1 em{
+    font-style:normal;
+    color:var(--accent);
+  }
+  .hero-sub{
+    font-size:17px;
+    color:var(--ink-soft);
+    max-width:46ch;
+    margin:0 0 32px;
+  }
+  .hero-actions{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    font-family:var(--font-body);
+    font-weight:600;
+    font-size:15px;
+    padding:13px 22px;
+    border-radius:9px;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-primary{
+    background:var(--ink);
+    color:#fff;
+  }
+  .btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(20,23,28,0.22);}
+  .btn-ghost{
+    border:1px solid var(--line);
+    color:var(--ink);
+    background:#fff;
+  }
+  .btn-ghost:hover{border-color:var(--ink);}
+
+  /* terminal card */
+  .terminal{
+    background:var(--surface);
+    border-radius:var(--radius);
+    overflow:hidden;
+    box-shadow:0 30px 60px -20px rgba(18,20,26,0.45);
+    border:1px solid var(--surface-line);
+  }
+  .terminal-bar{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:12px 16px;
+    background:var(--surface-2);
+    border-bottom:1px solid var(--surface-line);
+  }
+  .terminal-dot{width:10px;height:10px;border-radius:50%;}
+  .terminal-dot.r{background:#F35F5A;}
+  .terminal-dot.y{background:#F3BE4F;}
+  .terminal-dot.g{background:#3FC46C;}
+  .terminal-title{
+    margin-left:8px;
+    font-family:var(--font-mono);
+    font-size:12px;
+    color:var(--paper-on-dark);
+  }
+  .terminal-body{
+    padding:22px 20px 26px;
+    font-family:var(--font-mono);
+    font-size:13.5px;
+    color:var(--paper-on-dark);
+    min-height:230px;
+  }
+  .terminal-body .line{margin:0 0 10px;white-space:pre-wrap;}
+  .terminal-body .prompt{color:#6FE3B4;}
+  .terminal-body .path{color:#8FA6FF;}
+  .terminal-body .comment{color:#6B7080;}
+  .terminal-body .ok{color:#7FBE8E;}
+  .cursor{
+    display:inline-block;
+    width:7px;height:14px;
+    background:#C7CBD4;
+    vertical-align:-2px;
+    animation:blink 1s steps(1) infinite;
+  }
+  @keyframes blink{50%{opacity:0;}}
+  @media (prefers-reduced-motion:reduce){
+    .cursor{animation:none;}
+  }
+
+  /* ---------- Section shell ---------- */
+  section{padding:72px 0;}
+  .section-head{
+    max-width:640px;
+    margin:0 0 40px;
+  }
+  .kicker{
+    font-family:var(--font-mono);
+    font-size:12.5px;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    margin:0 0 10px;
+  }
+  h2{
+    font-family:var(--font-display);
+    font-size:clamp(26px,3.2vw,36px);
+    letter-spacing:-0.015em;
+    margin:0 0 12px;
+    font-weight:600;
+  }
+  .section-sub{color:var(--ink-soft);font-size:16px;margin:0;}
+
+  /* ---------- Diferenciadores ---------- */
+  .diff-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  @media (max-width:800px){
+    .diff-grid{grid-template-columns:1fr;}
+  }
+  .diff-card{
+    background:#fff;
+    padding:28px 26px;
+  }
+  .diff-card .tag{
+    font-family:var(--font-mono);
+    font-size:12px;
+    color:var(--accent);
+    margin-bottom:14px;
+    display:block;
+  }
+  .diff-card h3{
+    font-family:var(--font-display);
+    font-size:19px;
+    margin:0 0 10px;
+    font-weight:600;
+  }
+  .diff-card p{
+    color:var(--ink-soft);
+    font-size:14.5px;
+    margin:0;
+  }
+
+  /* ---------- Proyecto real ---------- */
+  .case{
+    --clay:#C96F4A;
+    --moss:#4F6F52;
+    --cream:#FBF1E4;
+    background:
+      radial-gradient(circle at 8% -10%, rgba(251,241,228,0.18), transparent 45%),
+      linear-gradient(135deg, var(--clay) 0%, #A85A3E 32%, #6A6A45 62%, var(--moss) 100%);
+    border-radius:20px;
+    padding:48px 44px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+    align-items:center;
+    color:var(--cream);
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 30px 60px -22px rgba(80,60,40,0.45);
+  }
+  .case::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:20px;
+    border:1px solid rgba(251,241,228,0.25);
+    pointer-events:none;
+  }
+  @media (max-width:800px){
+    .case{grid-template-columns:1fr;padding:32px 26px;}
+  }
+  .case-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-family:var(--font-mono);
+    font-size:11.5px;
+    font-weight:600;
+    letter-spacing:0.02em;
+    color:#3D2B1F;
+    background:var(--cream);
+    padding:5px 12px;
+    border-radius:20px;
+    margin-bottom:16px;
+  }
+  .case-label{
+    font-family:var(--font-mono);
+    font-size:12.5px;
+    color:#F4DFC4;
+    margin-bottom:10px;
+  }
+  .case h3{
+    font-family:var(--font-display);
+    font-size:28px;
+    margin:0 0 14px;
+    font-weight:700;
+    color:#fff;
+    text-shadow:0 2px 12px rgba(0,0,0,0.15);
+  }
+  .case p{
+    color:var(--cream);
+    opacity:0.95;
+    font-size:15px;
+    margin:0 0 26px;
+  }
+  .case-actions{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+  .case-link{
+    font-family:var(--font-mono);
+    font-size:14px;
+    color:var(--cream);
+    text-decoration:none;
+    border-bottom:1px solid rgba(251,241,228,0.5);
+    padding-bottom:2px;
+  }
+  .case-link:hover{border-color:var(--cream);}
+  .case-cta{
+    font-family:var(--font-body);
+    font-weight:700;
+    font-size:14px;
+    background:var(--cream);
+    color:#3D2B1F;
+    padding:12px 20px;
+    border-radius:9px;
+    text-decoration:none;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .case-cta:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 22px -8px rgba(0,0,0,0.35);
+  }
+  .case-stats{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    font-family:var(--font-mono);
+    border-left:1px solid rgba(251,241,228,0.3);
+    padding-left:32px;
+  }
+  @media (max-width:800px){
+    .case-stats{border-left:none;padding-left:0;border-top:1px solid rgba(251,241,228,0.3);padding-top:20px;}
+  }
+  .case-stat b{display:block;font-size:24px;color:#fff;font-weight:700;}
+  .case-stat span{font-size:12.5px;color:#F4DFC4;}
+
+  /* ---------- Pricing cards ---------- */
+  .plans{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+    align-items:stretch;
+  }
+  @media (max-width:900px){
+    .plans{grid-template-columns:1fr;}
+  }
+  .plan{
+    background:var(--surface);
+    border-radius:var(--radius);
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    border:1px solid var(--surface-line);
+    position:relative;
+    transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+  }
+  .plan:hover{
+    transform:translateY(-6px);
+    border-color:var(--accent);
+    box-shadow:0 26px 44px -18px rgba(20,23,28,0.35);
+  }
+  .plan.is-pro{
+    border-color:var(--pro);
+    box-shadow:0 24px 48px -18px rgba(232,163,61,0.35);
+  }
+  .plan.is-pro:hover{
+    transform:translateY(-6px) scale(1.015);
+    border-color:var(--pro);
+    box-shadow:0 30px 56px -16px rgba(232,163,61,0.5);
+  }
+  .plan-tab{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 18px;
+    background:var(--surface-2);
+    border-bottom:1px solid var(--surface-line);
+  }
+  .plan-tab .filename{
+    font-family:var(--font-mono);
+    font-size:12.5px;
+    color:var(--paper-on-dark);
+  }
+  .badge-pro{
+    font-family:var(--font-mono);
+    font-size:10.5px;
+    background:var(--pro);
+    color:#241804;
+    padding:3px 8px;
+    border-radius:20px;
+    font-weight:600;
+    letter-spacing:0.02em;
+  }
+  .plan-head{
+    padding:26px 22px 18px;
+  }
+  .plan-name{
+    font-family:var(--font-display);
+    font-size:20px;
+    color:#fff;
+    font-weight:600;
+    margin:0 0 6px;
+  }
+  .plan-tagline{
+    font-size:13px;
+    color:var(--diff-off);
+    margin:0 0 20px;
+  }
+  .plan-price{
+    font-family:var(--font-mono);
+    font-size:32px;
+    color:#fff;
+    font-weight:600;
+    display:flex;
+    align-items:baseline;
+    gap:6px;
+  }
+  .plan-price .cur{font-size:16px;color:var(--diff-off);}
+  .plan-price.small{font-size:22px;}
+  .plan-body{
+    padding:4px 22px 26px;
+    font-family:var(--font-mono);
+    font-size:13px;
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+  }
+  .plan-body .l{display:flex;gap:8px;color:#EDEFF3;}
+  .plan-body .plus{color:var(--diff-add-dark);}
+  .plan-body .minus{color:var(--diff-off);text-decoration:line-through;text-decoration-color:#3A3F4B;}
+  .plan-foot{
+    padding:18px 22px 26px;
+  }
+  .plan-btn{
+    display:block;
+    text-align:center;
+    width:100%;
+    padding:12px;
+    border-radius:8px;
+    font-weight:600;
+    font-size:14px;
+    text-decoration:none;
+    background:#fff;
+    color:var(--ink);
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+  .plan-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 22px -8px rgba(0,0,0,0.35);
+    background:var(--accent);
+    color:#fff;
+  }
+  .plan.is-pro .plan-btn{
+    background:var(--pro);
+    color:#241804;
+  }
+  .plan.is-pro .plan-btn:hover{
+    background:#f0b355;
+    color:#241804;
+    box-shadow:0 10px 24px -8px rgba(232,163,61,0.55);
+  }
+  .plan-meta{
+    font-family:var(--font-mono);
+    font-size:11.5px;
+    color:var(--diff-off);
+    margin-top:10px;
+    text-align:center;
+  }
+
+  /* ---------- Modal contacto ---------- */
+  .modal-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(15,17,21,0.6);
+    backdrop-filter:blur(3px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:200;
+  }
+  .modal-overlay.is-open{display:flex;}
+  .modal{
+    background:#fff;
+    border-radius:16px;
+    width:100%;
+    max-width:440px;
+    padding:30px 28px 26px;
+    position:relative;
+    box-shadow:0 40px 80px -20px rgba(0,0,0,0.4);
+  }
+  .modal-close{
+    position:absolute;
+    top:16px;right:16px;
+    width:30px;height:30px;
+    border:none;
+    background:var(--bg-alt);
+    border-radius:50%;
+    font-size:16px;
+    cursor:pointer;
+    color:var(--ink-soft);
+    line-height:1;
+  }
+  .modal-close:hover{background:var(--line);color:var(--ink);}
+  .modal h3{
+    font-family:var(--font-display);
+    font-size:21px;
+    margin:0 0 6px;
+    font-weight:600;
+  }
+  .modal p.modal-sub{
+    color:var(--ink-soft);
+    font-size:14px;
+    margin:0 0 20px;
+  }
+  .modal-field{margin-bottom:14px;}
+  .modal-field label{
+    display:block;
+    font-family:var(--font-mono);
+    font-size:12px;
+    color:var(--ink-soft);
+    margin-bottom:6px;
+  }
+  .modal-field input,
+  .modal-field textarea{
+    width:100%;
+    padding:11px 13px;
+    border:1px solid var(--line);
+    border-radius:8px;
+    font-family:var(--font-body);
+    font-size:14px;
+    color:var(--ink);
+    background:var(--bg);
+    resize:vertical;
+  }
+  .modal-field input:focus,
+  .modal-field textarea:focus{outline:2px solid var(--accent);outline-offset:1px;}
+  .modal-submit{
+    width:100%;
+    padding:13px;
+    border:none;
+    border-radius:8px;
+    background:var(--ink);
+    color:#fff;
+    font-weight:600;
+    font-size:14.5px;
+    cursor:pointer;
+    transition:transform .15s ease, background .15s ease;
+    margin-top:4px;
+  }
+  .modal-submit:hover{transform:translateY(-1px);background:var(--accent);}
+  .modal-submit:disabled{opacity:0.6;cursor:not-allowed;transform:none;}
+  .modal-status{
+    font-size:13px;
+    margin-top:12px;
+    text-align:center;
+  }
+  .modal-status.ok{color:var(--diff-add);}
+  .modal-status.err{color:#D9534F;}
+
+  /* ---------- CTA / Footer ---------- */
+  .cta{
+    background:var(--surface);
+    border-radius:20px;
+    padding:56px 44px;
+    text-align:center;
+    color:#fff;
+  }
+  .cta h2{color:#fff;}
+  .cta p{color:var(--paper-on-dark);max-width:52ch;margin:0 auto 28px;}
+  .cta .hero-actions{justify-content:center;}
+  .cta .btn-ghost{background:transparent;border-color:var(--surface-line);color:#fff;}
+
+  footer{
+    padding:36px 0 48px;
+    border-top:1px solid var(--line);
+    margin-top:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  footer .brand{color:var(--ink);}
+  footer .foot-note{
+    font-family:var(--font-mono);
+    font-size:12.5px;
+    color:var(--diff-off);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand"><span class="dot"></span>edkar<span style="color:var(--ink-soft)">.dev</span></div>
+    <ul class="nav-links nav-mobile-hide">
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#proyecto">Proyecto real</a></li>
+      <li><a href="#planes">Planes</a></li>
+    </ul>
+    <a class="nav-cta" href="#contacto">Cotizar proyecto</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- HERO -->
+  <section class="hero" style="padding-bottom:0;">
+    <div>
+      <p class="eyebrow">desarrollo-web --target=pymes --stack=propio</p>
+      <h1>Sitios web con <em>código propio</em><br>para pymes que quieren crecer</h1>
+      <p class="hero-sub">Nada de plantillas genéricas ni mensualidades eternas de constructores. Diseño a medida, tecnología moderna y un sitio que carga rápido de verdad.</p>
+      <div class="hero-actions">
+        <a href="#planes" class="btn btn-primary">Ver planes y precios →</a>
+        <a href="#proyecto" class="btn btn-ghost">Ver proyecto real</a>
+      </div>
+    </div>
+
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="terminal-dot r"></span>
+        <span class="terminal-dot y"></span>
+        <span class="terminal-dot g"></span>
+        <span class="terminal-title">zsh — nuevo-proyecto</span>
+      </div>
+      <div class="terminal-body">
+        <p class="line"><span class="prompt">➜</span> <span class="path">~/tu-negocio</span> npx crear-sitio --pyme</p>
+        <p class="line comment">// analizando qué necesita tu negocio...</p>
+        <p class="line"><span class="ok">✓</span> diseño a medida (no plantilla)</p>
+        <p class="line"><span class="ok">✓</span> responsive: celular, tablet, escritorio</p>
+        <p class="line"><span class="ok">✓</span> stack: Next.js + Vercel</p>
+        <p class="line"><span class="ok">✓</span> hosting rápido y prácticamente gratis</p>
+        <p class="line comment">// listo para recibir clientes</p>
+        <p class="line"><span class="prompt">➜</span> <span class="path">~/tu-negocio</span> <span class="cursor"></span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIFERENCIADORES -->
+  <section id="servicios">
+    <div class="section-head">
+      <p class="kicker">Por qué código propio</p>
+      <h2>No es una plantilla con tu logo pegado</h2>
+      <p class="section-sub">Cada sitio se construye desde cero, pensado para tu negocio específico — no para encajar en un molde genérico.</p>
+    </div>
+    <div class="diff-grid">
+      <div class="diff-card">
+        <span class="tag">// control total</span>
+        <h3>Diseño con identidad real</h3>
+        <p>Sin límites de plantilla. La estructura, el copy y el diseño se piensan para lo que tu negocio realmente hace.</p>
+      </div>
+      <div class="diff-card">
+        <span class="tag">// rendimiento</span>
+        <h3>Rápido de verdad</h3>
+        <p>Next.js + Vercel: sitios livianos que cargan en segundos, sin plugins ni capas innecesarias que lo ralentizan.</p>
+      </div>
+      <div class="diff-card">
+        <span class="tag">// después de la entrega</span>
+        <h3>No desaparezco</h3>
+        <p>Los planes PRO incluyen soporte post-entrega — el punto donde la mayoría de los freelancers baratos falla.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROYECTO REAL -->
+  <section id="proyecto">
+    <div class="case">
+      <div>
+        <span class="case-badge">★ Cliente real</span>
+        <p class="case-label">// proyecto en producción</p>
+        <h3>Centro Orígami</h3>
+        <p>Centro educativo de primera infancia en Santiago que transforma residuos de pymes en materiales pedagógicos. Sitio institucional con identidad propia, video embebido y estructura pensada para explicar un modelo de economía circular.</p>
+        <div class="case-actions">
+          <a class="case-cta" href="https://centro-origami.vercel.app/" target="_blank" rel="noopener">Ver sitio en vivo ↗</a>
+          <a class="case-link" href="#contacto">Quiero un sitio así →</a>
+        </div>
+      </div>
+      <div class="case-stats">
+        <div class="case-stat"><b>Next.js</b><span>stack de desarrollo</span></div>
+        <div class="case-stat"><b>Vercel</b><span>hosting y deploy</span></div>
+        <div class="case-stat"><b>100%</b><span>diseño a medida</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANES -->
+  <section id="planes">
+    <div class="section-head">
+      <p class="kicker">Planes</p>
+      <h2>Nuestros planes</h2>
+      <p class="section-sub">Dos planes estándar con precio fijo, y un tercero a medida para proyectos con requerimientos propios.</p>
+    </div>
+
+    <div class="plans">
+      <!-- BASICO -->
+      <div class="plan">
+        <div class="plan-tab">
+          <span class="filename">basico.plan</span>
+        </div>
+        <div class="plan-head">
+          <p class="plan-name">Presencia Digital</p>
+          <p class="plan-tagline">Para empezar a existir en internet</p>
+          <p class="plan-price"><span class="cur">$</span>200.000<span class="cur" style="font-size:13px;">CLP</span></p>
+        </div>
+        <div class="plan-body">
+          <p class="l"><span class="plus">+</span> 1 página (landing / one-pager)</p>
+          <p class="l"><span class="plus">+</span> diseño personalizado con tu marca</p>
+          <p class="l"><span class="plus">+</span> responsive (celular y desktop)</p>
+          <p class="l"><span class="plus">+</span> formulario de contacto</p>
+          <p class="l"><span class="plus">+</span> 1 ronda de revisión</p>
+          <p class="l"><span class="minus">- WhatsApp / redes integradas</span></p>
+          <p class="l"><span class="minus">- SEO básico</span></p>
+          <p class="l"><span class="minus">- blog / noticias</span></p>
+          <p class="l"><span class="minus">- soporte post-entrega</span></p>
+          <p class="l"><span class="minus">- funcionalidades avanzadas</span></p>
+        </div>
+        <div class="plan-foot">
+          <a class="plan-btn" href="#contacto">Elegir Básico</a>
+          <p class="plan-meta">entrega ~1 semana</p>
+        </div>
+      </div>
+
+      <!-- PRO -->
+      <div class="plan is-pro">
+        <div class="plan-tab">
+          <span class="filename">pro.plan</span>
+          <span class="badge-pro">MÁS ELEGIDO</span>
+        </div>
+        <div class="plan-head">
+          <p class="plan-name">Crecimiento</p>
+          <p class="plan-tagline">Para captar clientes activamente</p>
+          <p class="plan-price"><span class="cur">$</span>350.000<span class="cur" style="font-size:13px;">CLP</span></p>
+        </div>
+        <div class="plan-body">
+          <p class="l"><span class="plus">+</span> 4 páginas (nosotros, servicios...)</p>
+          <p class="l"><span class="plus">+</span> responsive (celular y desktop)</p>
+          <p class="l"><span class="plus">+</span> formulario de contacto + mapa</p>
+          <p class="l"><span class="plus">+</span> WhatsApp y redes integradas</p>
+          <p class="l"><span class="plus">+</span> SEO básico (metadatos, sitemap)</p>
+          <p class="l"><span class="plus">+</span> blog / noticias</p>
+          <p class="l"><span class="plus">+</span> 3 rondas de revisión</p>
+          <p class="l"><span class="plus">+</span> soporte 30 días incluido</p>
+        </div>
+        <div class="plan-foot">
+          <a class="plan-btn" href="#contacto">Elegir PRO</a>
+          <p class="plan-meta">entrega ~3 semanas</p>
+        </div>
+      </div>
+
+      <!-- PERSONALIZADO -->
+      <div class="plan">
+        <div class="plan-tab">
+          <span class="filename">custom.plan</span>
+        </div>
+        <div class="plan-head">
+          <p class="plan-name">A Medida</p>
+          <p class="plan-tagline">Para requerimientos específicos</p>
+          <p class="plan-price small">A cotización</p>
+        </div>
+        <div class="plan-body">
+          <p class="l"><span class="plus">+</span> páginas según proyecto</p>
+          <p class="l"><span class="plus">+</span> diseño 100% a medida</p>
+          <p class="l"><span class="plus">+</span> catálogo, reservas o panel admin</p>
+          <p class="l"><span class="plus">+</span> e-commerce y pagos (Webpay, Flow)</p>
+          <p class="l"><span class="plus">+</span> multi-idioma</p>
+          <p class="l"><span class="plus">+</span> SEO y funcionalidades avanzadas</p>
+          <p class="l"><span class="plus">+</span> WhatsApp, SEO y soporte según necesidad</p>
+          <p class="l"><span class="plus">+</span> rondas de revisión a definir</p>
+        </div>
+        <div class="plan-foot">
+          <a class="plan-btn" href="#contacto">Conversemos</a>
+          <p class="plan-meta">plazo según alcance</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="contacto">
+    <div class="cta">
+      <h2>¿Conversamos sobre tu proyecto?</h2>
+      <p>Cuéntame qué necesita tu negocio y armamos el plan que más te acomode.</p>
+      <div class="hero-actions">
+        <button type="button" class="btn btn-primary" style="background:var(--pro);color:#241804;border:none;cursor:pointer;font-family:inherit;" onclick="document.getElementById('modalContacto').classList.add('is-open')">Escríbeme por correo</button>
+        <a class="btn btn-ghost" href="https://wa.me/56988052031" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <div class="brand">edkar<span style="color:var(--ink-soft)">.dev</span></div>
+  <p class="foot-note">// hecho con Next.js-grade craft, servido en Vercel</p>
+</footer>
+
+<!-- MODAL CONTACTO -->
+<div class="modal-overlay" id="modalContacto">
+  <div class="modal">
+    <button type="button" class="modal-close" onclick="document.getElementById('modalContacto').classList.remove('is-open')">✕</button>
+    <h3>Escríbeme por correo</h3>
+    <p class="modal-sub">Cuéntame de tu proyecto y te respondo directo a tu bandeja.</p>
+    <form id="formContacto">
+      <input type="hidden" name="access_key" value="90b318c3-a64d-4659-b6a1-30e9441a977b">
+      <input type="hidden" name="subject" value="Nuevo contacto desde webvitae.ai">
+      <div class="modal-field">
+        <label for="fc-nombre">Nombre</label>
+        <input id="fc-nombre" type="text" name="name" required>
+      </div>
+      <div class="modal-field">
+        <label for="fc-email">Tu correo</label>
+        <input id="fc-email" type="email" name="email" required>
+      </div>
+      <div class="modal-field">
+        <label for="fc-mensaje">Mensaje</label>
+        <textarea id="fc-mensaje" name="message" rows="4" required></textarea>
+      </div>
+      <button type="submit" class="modal-submit" id="fc-submit">Enviar mensaje</button>
+      <p class="modal-status" id="fc-status"></p>
+    </form>
+  </div>
+</div>
+
+<script>
+  document.getElementById('modalContacto').addEventListener('click', function(e){
+    if(e.target === this){ this.classList.remove('is-open'); }
+  });
+
+  document.getElementById('formContacto').addEventListener('submit', async function(e){
+    e.preventDefault();
+    const btn = document.getElementById('fc-submit');
+    const status = document.getElementById('fc-status');
+    const data = new FormData(this);
+
+    btn.disabled = true;
+    btn.textContent = 'Enviando...';
+    status.textContent = '';
+    status.className = 'modal-status';
+
+    try{
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: data
+      });
+      const result = await res.json();
+      if(result.success){
+        status.textContent = '¡Listo! Tu mensaje fue enviado, te responderé pronto.';
+        status.className = 'modal-status ok';
+        this.reset();
+      } else {
+        status.textContent = 'Algo falló al enviar. Intenta de nuevo o escríbeme directo a edkarob@gmail.com';
+        status.className = 'modal-status err';
+      }
+    } catch(err){
+      status.textContent = 'Algo falló al enviar. Intenta de nuevo o escríbeme directo a edkarob@gmail.com';
+      status.className = 'modal-status err';
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Enviar mensaje';
+    }
+  });
+</script>
+
+</body>
+</html>
