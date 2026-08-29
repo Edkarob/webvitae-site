@@ -91,8 +91,8 @@
     list-style:none;
     margin:0;padding:0;
   }
-  .nav-links a{text-decoration:none;color:var(--ink-soft);transition:color .15s;}
-  .nav-links a:hover{color:var(--ink);}
+  .nav-links a{text-decoration:none;color:var(--ink-soft);display:inline-block;transition:color .18s ease, transform .18s ease;}
+  .nav-links a:hover{color:var(--accent);transform:translateY(-2px);}
   .nav-cta{
     font-family:var(--font-mono);
     font-size:13px;
@@ -272,6 +272,14 @@
   .diff-card{
     background:#fff;
     padding:28px 26px;
+    transition:transform .22s ease, box-shadow .22s ease;
+    position:relative;
+    z-index:1;
+  }
+  .diff-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 36px -16px rgba(62,99,221,0.45);
+    border-bottom:2px solid var(--accent);
   }
   .diff-card .tag{
     font-family:var(--font-mono);
@@ -660,7 +668,7 @@
 
 <header>
   <div class="wrap nav">
-    <div class="brand"><span class="dot"></span>edkar<span style="color:var(--ink-soft)">.dev</span></div>
+    <div class="brand"><span class="dot"></span>Edkar<span style="color:var(--ink-soft)">_</span><span style="color:var(--accent)">ÖB</span></div>
     <ul class="nav-links nav-mobile-hide">
       <li><a href="#servicios">Servicios</a></li>
       <li><a href="#proyecto">Proyecto real</a></li>
@@ -858,7 +866,7 @@
 </main>
 
 <footer class="wrap">
-  <div class="brand">edkar<span style="color:var(--ink-soft)">.dev</span></div>
+  <div class="brand">Edkar<span style="color:var(--ink-soft)">_</span><span style="color:var(--accent)">ÖB</span></div>
   <p class="foot-note">// hecho con Next.js-grade craft, servido en Vercel</p>
 </footer>
 
