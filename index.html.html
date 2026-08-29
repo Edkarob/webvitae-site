@@ -91,8 +91,8 @@
     list-style:none;
     margin:0;padding:0;
   }
-  .nav-links a{text-decoration:none;color:var(--ink-soft);display:inline-block;transition:color .18s ease, transform .18s ease;}
-.nav-links a:hover{color:var(--accent);transform:translateY(-2px);}
+  .nav-links a{text-decoration:none;color:var(--ink-soft);transition:color .15s;}
+  .nav-links a:hover{color:var(--ink);}
   .nav-cta{
     font-family:var(--font-mono);
     font-size:13px;
@@ -270,16 +270,8 @@
     .diff-grid{grid-template-columns:1fr;}
   }
   .diff-card{
-  background:#fff;
-  padding:28px 26px;
-  transition:transform .22s ease, box-shadow .22s ease;
-  position:relative;
-  z-index:1;
-}
-.diff-card:hover{
-  transform:translateY(-6px);
-  box-shadow:0 20px 36px -16px rgba(62,99,221,0.45);
-  border-bottom:2px solid var(--accent);
+    background:#fff;
+    padding:28px 26px;
   }
   .diff-card .tag{
     font-family:var(--font-mono);
@@ -409,6 +401,15 @@
   .case-stat span{font-size:12.5px;color:#F4DFC4;}
 
   /* ---------- Pricing cards ---------- */
+  .plans{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+    align-items:stretch;
+  }
+  @media (max-width:900px){
+    .plans{grid-template-columns:1fr;}
+  }
   .plan{
     background:var(--surface);
     border-radius:var(--radius);
@@ -455,6 +456,9 @@
     border-radius:20px;
     font-weight:600;
     letter-spacing:0.02em;
+  }
+  .plan-head{
+    padding:26px 22px 18px;
   }
   .plan-name{
     font-family:var(--font-display);
@@ -505,14 +509,22 @@
     text-decoration:none;
     background:#fff;
     color:var(--ink);
-    .plan.is-pro .plan-btn{
-  background:var(--accent);
-  color:#fff;
-}
-.plan.is-pro .plan-btn:hover{
-  background:#5a7ef0;
-  color:#fff;
-  box-shadow:0 10px 24px -8px rgba(62,99,221,0.55);
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+  .plan-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 22px -8px rgba(0,0,0,0.35);
+    background:var(--accent);
+    color:#fff;
+  }
+  .plan.is-pro .plan-btn{
+    background:var(--accent);
+    color:#fff;
+  }
+  .plan.is-pro .plan-btn:hover{
+    background:#5a7ef0;
+    color:#fff;
+    box-shadow:0 10px 24px -8px rgba(62,99,221,0.55);
   }
   .plan-meta{
     font-family:var(--font-mono);
@@ -648,7 +660,7 @@
 
 <header>
   <div class="wrap nav">
-    <div class="brand"><span class="dot"></span>Edkar<span style="color:var(--ink-soft)">_</span><span style="color:#3E63DD">ÖB</span></div>
+    <div class="brand"><span class="dot"></span>edkar<span style="color:var(--ink-soft)">.dev</span></div>
     <ul class="nav-links nav-mobile-hide">
       <li><a href="#servicios">Servicios</a></li>
       <li><a href="#proyecto">Proyecto real</a></li>
@@ -846,7 +858,7 @@
 </main>
 
 <footer class="wrap">
-  <div class="brand">Edkar<span style="color:var(--ink-soft)">_</span><span style="color:#3E63DD">ÖB</span></div>
+  <div class="brand">edkar<span style="color:var(--ink-soft)">.dev</span></div>
   <p class="foot-note">// hecho con Next.js-grade craft, servido en Vercel</p>
 </footer>
 
