@@ -270,8 +270,15 @@
     .diff-grid{grid-template-columns:1fr;}
   }
   .diff-card{
-    background:#fff;
-    padding:28px 26px;
+  background:#fff;
+  padding:28px 26px;
+  transition:transform .22s ease, box-shadow .22s ease;
+  position:relative;
+  z-index:1;
+}
+.diff-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 20px 36px -16px rgba(20,23,28,0.25);
   }
   .diff-card .tag{
     font-family:var(--font-mono);
