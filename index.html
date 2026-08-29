@@ -409,15 +409,6 @@
   .case-stat span{font-size:12.5px;color:#F4DFC4;}
 
   /* ---------- Pricing cards ---------- */
-  .plans{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
-    align-items:stretch;
-  }
-  @media (max-width:900px){
-    .plans{grid-template-columns:1fr;}
-  }
   .plan{
     background:var(--surface);
     border-radius:var(--radius);
@@ -425,15 +416,22 @@
     display:flex;
     flex-direction:column;
     border:1px solid var(--surface-line);
-   .plan.is-pro{
-  border-color:var(--accent);
-  box-shadow:0 24px 48px -18px rgba(62,99,221,0.4);
-}
-.plan.is-pro:hover{
-  transform:translateY(-6px) scale(1.015);
-  border-color:var(--accent);
-  box-shadow:0 30px 56px -16px rgba(62,99,221,0.55);
-}
+    position:relative;
+    transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+  }
+  .plan:hover{
+    transform:translateY(-6px);
+    border-color:var(--accent);
+    box-shadow:0 26px 44px -18px rgba(20,23,28,0.35);
+  }
+  .plan.is-pro{
+    border-color:var(--accent);
+    box-shadow:0 24px 48px -18px rgba(62,99,221,0.4);
+  }
+  .plan.is-pro:hover{
+    transform:translateY(-6px) scale(1.015);
+    border-color:var(--accent);
+    box-shadow:0 30px 56px -16px rgba(62,99,221,0.55);
   }
   .plan-tab{
     display:flex;
@@ -447,18 +445,16 @@
     font-family:var(--font-mono);
     font-size:12.5px;
     color:var(--paper-on-dark);
-  .badge-pro{
-  font-family:var(--font-mono);
-  font-size:10px;
-  background:var(--accent);
-  color:#fff;
-  padding:3px 8px;
-  border-radius:20px;
-  font-weight:600;
-  letter-spacing:0.02em;
   }
-  .plan-head{
-    padding:26px 22px 18px;
+  .badge-pro{
+    font-family:var(--font-mono);
+    font-size:10px;
+    background:var(--accent);
+    color:#fff;
+    padding:3px 8px;
+    border-radius:20px;
+    font-weight:600;
+    letter-spacing:0.02em;
   }
   .plan-name{
     font-family:var(--font-display);
