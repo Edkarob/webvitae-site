@@ -683,9 +683,49 @@
   .modal{padding:26px 20px 22px;}
   footer{flex-direction:column;align-items:flex-start;}
 }
+/* ---------- Botón flotante WhatsApp ---------- */
+.wa-float{
+  position:fixed;
+  bottom:24px;
+  right:24px;
+  width:58px;
+  height:58px;
+  background:#25D366;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 10px 26px -6px rgba(37,211,102,0.55);
+  z-index:150;
+  transition:transform .2s ease, box-shadow .2s ease;
+  animation:wa-pulse 2.6s ease-in-out infinite;
+}
+.wa-float:hover{
+  transform:translateY(-3px) scale(1.06);
+  box-shadow:0 14px 32px -6px rgba(37,211,102,0.7);
+  animation-play-state:paused;
+}
+.wa-float svg{width:29px;height:29px;}
+@keyframes wa-pulse{
+  0%,100%{box-shadow:0 10px 26px -6px rgba(37,211,102,0.55);}
+  50%{box-shadow:0 10px 26px -6px rgba(37,211,102,0.9), 0 0 0 8px rgba(37,211,102,0.15);}
+}
+@media (prefers-reduced-motion:reduce){
+  .wa-float{animation:none;}
+}
+@media (max-width:600px){
+  .wa-float{width:52px;height:52px;bottom:18px;right:18px;}
+  .wa-float svg{width:26px;height:26px;}
+}
 </style>
 </head>
 <body>
+  <a href="https://wa.me/56988052031" target="_blank" rel="noopener" class="wa-float" aria-label="Escríbeme por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12.004 2c-5.523 0-10 4.477-10 10 0 1.767.463 3.484 1.343 5.001L2 22l5.117-1.334A9.96 9.96 0 0012.004 22c5.523 0 10-4.477 10-10s-4.477-10-10-10zm0 18.166a8.14 8.14 0 01-4.152-1.136l-.298-.177-3.037.791.81-2.96-.194-.304a8.145 8.145 0 01-1.264-4.38c0-4.508 3.669-8.177 8.177-8.177 2.183 0 4.236.851 5.782 2.398a8.12 8.12 0 012.396 5.781c-.001 4.508-3.67 8.164-8.22 8.164z"/>
+  </svg>
+</a>
 
 <header>
   <div class="wrap nav">
