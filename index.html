@@ -425,22 +425,15 @@
     display:flex;
     flex-direction:column;
     border:1px solid var(--surface-line);
-    position:relative;
-    transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
-  }
-  .plan:hover{
-    transform:translateY(-6px);
-    border-color:var(--accent);
-    box-shadow:0 26px 44px -18px rgba(20,23,28,0.35);
-  }
-  .plan.is-pro{
-    border-color:var(--pro);
-    box-shadow:0 24px 48px -18px rgba(232,163,61,0.35);
-  }
-  .plan.is-pro:hover{
-    transform:translateY(-6px) scale(1.015);
-    border-color:var(--pro);
-    box-shadow:0 30px 56px -16px rgba(232,163,61,0.5);
+   .plan.is-pro{
+  border-color:var(--accent);
+  box-shadow:0 24px 48px -18px rgba(62,99,221,0.4);
+}
+.plan.is-pro:hover{
+  transform:translateY(-6px) scale(1.015);
+  border-color:var(--accent);
+  box-shadow:0 30px 56px -16px rgba(62,99,221,0.55);
+}
   }
   .plan-tab{
     display:flex;
@@ -454,16 +447,15 @@
     font-family:var(--font-mono);
     font-size:12.5px;
     color:var(--paper-on-dark);
-  }
   .badge-pro{
-    font-family:var(--font-mono);
-    font-size:10.5px;
-    background:var(--pro);
-    color:#241804;
-    padding:3px 8px;
-    border-radius:20px;
-    font-weight:600;
-    letter-spacing:0.02em;
+  font-family:var(--font-mono);
+  font-size:10px;
+  background:var(--accent);
+  color:#fff;
+  padding:3px 8px;
+  border-radius:20px;
+  font-weight:600;
+  letter-spacing:0.02em;
   }
   .plan-head{
     padding:26px 22px 18px;
@@ -517,22 +509,14 @@
     text-decoration:none;
     background:#fff;
     color:var(--ink);
-    transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
-  }
-  .plan-btn:hover{
-    transform:translateY(-2px);
-    box-shadow:0 10px 22px -8px rgba(0,0,0,0.35);
-    background:var(--accent);
-    color:#fff;
-  }
-  .plan.is-pro .plan-btn{
-    background:var(--pro);
-    color:#241804;
-  }
-  .plan.is-pro .plan-btn:hover{
-    background:#f0b355;
-    color:#241804;
-    box-shadow:0 10px 24px -8px rgba(232,163,61,0.55);
+    .plan.is-pro .plan-btn{
+  background:var(--accent);
+  color:#fff;
+}
+.plan.is-pro .plan-btn:hover{
+  background:#5a7ef0;
+  color:#fff;
+  box-shadow:0 10px 24px -8px rgba(62,99,221,0.55);
   }
   .plan-meta{
     font-family:var(--font-mono);
@@ -800,7 +784,7 @@
       <div class="plan is-pro">
         <div class="plan-tab">
           <span class="filename">pro.plan</span>
-          <span class="badge-pro">MÁS ELEGIDO</span>
+          <span class="badge-pro">MÁS ELEGIDO POR EMPRENDEDORES</span>
         </div>
         <div class="plan-head">
           <p class="plan-name">Crecimiento</p>
