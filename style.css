@@ -206,6 +206,18 @@
     color:var(--paper-on-dark);
     min-height:230px;
   }
+
+  .terminal-photo img{
+  display:block;
+  width:100%;
+  height:320px;
+  object-fit:cover;
+  object-position:center 20%;
+}
+@media (max-width:900px){
+  .terminal-photo img{height:260px;}
+}
+
   .terminal-body .line{margin:0 0 10px;white-space:pre-wrap;}
   .terminal-body .prompt{color:#6FE3B4;}
   .terminal-body .path{color:#8FA6FF;}
