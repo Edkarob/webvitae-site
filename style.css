@@ -726,3 +726,16 @@
 @media (min-width:801px){
   .diff-grid-4{grid-template-columns:repeat(2,1fr);}
 }
+.service-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:var(--accent-soft);
+  color:var(--accent);
+  font-family:var(--font-mono);
+  font-size:13px;
+  font-weight:600;
+  padding:7px 14px;
+  border-radius:20px;
+  margin-bottom:16px;
+}
