@@ -312,23 +312,20 @@
 
   /* ---------- Proyecto real ---------- */
   .case{
-    --clay:#C96F4A;
-    --moss:#4F6F52;
-    --cream:#FBF1E4;
-    background:
-      radial-gradient(circle at 8% -10%, rgba(251,241,228,0.18), transparent 45%),
-      linear-gradient(135deg, var(--clay) 0%, #A85A3E 32%, #6A6A45 62%, var(--moss) 100%);
-    border-radius:20px;
-    padding:48px 44px;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:40px;
-    align-items:center;
-    color:var(--cream);
-    position:relative;
-    overflow:hidden;
-    box-shadow:0 30px 60px -22px rgba(80,60,40,0.45);
-  }
+  background:
+    radial-gradient(circle at 15% -15%, rgba(62,99,221,0.35), transparent 55%),
+    linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 55%, #10131A 100%);
+  border-radius:20px;
+  padding:48px 44px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+  align-items:center;
+  color:#fff;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 30px 60px -22px rgba(20,23,28,0.5);
+}
   .case::after{
     content:"";
     position:absolute;
@@ -348,8 +345,8 @@
     font-size:11.5px;
     font-weight:600;
     letter-spacing:0.02em;
-    color:#3D2B1F;
-    background:var(--cream);
+    color:#fff;
+    background:var(--accent);
     padding:5px 12px;
     border-radius:20px;
     margin-bottom:16px;
@@ -357,7 +354,7 @@
   .case-label{
     font-family:var(--font-mono);
     font-size:12.5px;
-    color:#F4DFC4;
+    color:var(--paper-on-dark);
     margin-bottom:10px;
   }
   .case h3{
@@ -369,7 +366,7 @@
     text-shadow:0 2px 12px rgba(0,0,0,0.15);
   }
   .case p{
-    color:var(--cream);
+    color:var(--paper-on-dark);
     opacity:0.95;
     font-size:15px;
     margin:0 0 26px;
@@ -383,9 +380,9 @@
   .case-link{
     font-family:var(--font-mono);
     font-size:14px;
-    color:var(--cream);
+    color:#fff;
     text-decoration:none;
-    border-bottom:1px solid rgba(251,241,228,0.5);
+    border-bottom:1px solid rgba(255,255,255,0.4);
     padding-bottom:2px;
   }
   .case-link:hover{border-color:var(--cream);}
@@ -393,8 +390,8 @@
     font-family:var(--font-body);
     font-weight:700;
     font-size:14px;
-    background:var(--cream);
-    color:#3D2B1F;
+    background:var(--accent);
+    color:#fff;   
     padding:12px 20px;
     border-radius:9px;
     text-decoration:none;
@@ -402,21 +399,21 @@
   }
   .case-cta:hover{
     transform:translateY(-2px);
-    box-shadow:0 10px 22px -8px rgba(0,0,0,0.35);
+    box-shadow:0 10px 22px -8px rgba(62,99,221,0.5);
   }
   .case-stats{
     display:flex;
     flex-direction:column;
     gap:16px;
     font-family:var(--font-mono);
-    border-left:1px solid rgba(251,241,228,0.3);
+    border-left:1px solid var(--surface-line);
     padding-left:32px;
   }
   @media (max-width:800px){
     .case-stats{border-left:none;padding-left:0;border-top:1px solid rgba(251,241,228,0.3);padding-top:20px;}
   }
   .case-stat b{display:block;font-size:24px;color:#fff;font-weight:700;}
-  .case-stat span{font-size:12.5px;color:#F4DFC4;}
+  .case-stat span{font-size:12.5px;color:var(--paper-on-dark);}
 
   /* ---------- Pricing cards ---------- */
   .plans{
