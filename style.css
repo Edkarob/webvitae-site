@@ -142,6 +142,10 @@
     font-style:normal;
     color:var(--accent);
   }
+  h2 em{
+  font-style:normal;
+  color:var(--accent);
+}
   .hero-sub{
     font-size:17px;
     color:var(--ink-soft);
